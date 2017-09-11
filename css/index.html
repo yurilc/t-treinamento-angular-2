@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8" >
+
+        <title>Minha primeira página HTML</title>
+
+        <link rel="stylesheet" href="css/index.css">
+
+        <style>
+            body {
+                background-color: green;
+            }
+
+            .underline {
+                text-decoration:  underline;
+            }
+
+            p {
+                color: green;
+            }
+
+            li {
+                background-color: pink;
+            }
+
+            ol>li {
+                background-color: blue;
+            }
+
+            h3.underline {
+                background-color: red;
+            }
+
+            ul>li:last-child, ul>li:first-child {
+                cursor: pointer;
+            }
+
+            ul>li:nth-child(2) {
+                background-color: purple;
+            }
+        </style>
+
+    </head>
+    <body style="background-color: white;"><!-- Isto é um comentário -->
+        <h1 class="underline" style="color: red">Meu Título 1</h1>
+        <h2 class="underline" style="background-color: yellow">Meu Título 2</h2>
+        <h3 class="underline" style="text-transform: uppercase">Meu Título 3</h3>
+        <h4 style="color: #f0f0f0; background-color: #acb123">Meu Título 4</h4>
+        <h5>Meu Título 5</h5>
+        <h6>Meu Título 6</h6>
+        <p style="margin-left: 30px;">
+            Meu texto dentro de um parágrafo e bla
+            bla bla bla bla bla
+        </p>
+        <img src="http://via.placeholder.com/350x150"
+            style="width: 100px; height: 80px;">
+
+        <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+        </ul>
+
+        <ol>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+        </ol>
+    </body>
+</html>
