@@ -17,7 +17,7 @@ function validarFormulario() {
     } else {
         nome.style.backgroundColor = 'white';
     }
-    if(cpf.value.trim() === '') {
+    if(!/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/.test(cpf.value.trim())) {
         invalidos.push('CPF');
         cpf.style.backgroundColor = 'red';
     } else {
@@ -48,4 +48,32 @@ function validarFormulario() {
     }
 
     return true;
+}
+
+function maskCpf(event) {
+    var value = event.target.value.replace(/\D/g, '');
+    if(value.length > 11) {
+        value = value.substring(0,11);
+    }
+    if(value.length > 9) {
+        event.target.value =
+            value.replace(
+                /(\d{3})(\d{3})(\d{3})(\d{1,2})/,
+                '$1.$2.$3-$4'
+            );
+    } else if(value.length > 6) {
+        event.target.value =
+        value.replace(
+            /(\d{3})(\d{3})(\d{1,3})/,
+            '$1.$2.$3'
+        );
+    } else if(value.length > 3) {
+        event.target.value =
+        value.replace(
+            /(\d{3})(\d{1,3})/,
+            '$1.$2'
+        );
+    } else {
+        event.target.value = value;
+    }
 }
