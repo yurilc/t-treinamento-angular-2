@@ -1,49 +1,63 @@
 function validarFormulario() {
-    var nome = document.getElementById('nome');
-    var cpf = document.getElementById('cpf');
-    var dataNascimento = document.getElementById('data_nascimento');
-    var sexoM = document.getElementById('sexo_m').checked;
-    var sexoF = document.getElementById('sexo_f').checked;
-    var profissao = document.getElementById('profissao');
-    var musicaPagode = document.getElementById('musica_pagode').checked;
-    var musicaRock = document.getElementById('musica_rock').checked;
-    var musicaForro = document.getElementById('musica_forro').checked;
+    var nome = $('#nome');
+    var cpf = $('#cpf');
+    var dataNascimento = $('#data_nascimento');
+    var sexoM = $('#sexo_m')[0].checked;
+    var sexoF = $('#sexo_f')[0].checked;
+    var profissao = $('#profissao');
+    var musicaPagode = $('#musica_pagode')[0].checked;
+    var musicaRock = $('#musica_rock')[0].checked;
+    var musicaForro = $('#musica_forro')[0].checked;
     
     var invalidos = [];
     
-    if(nome.value.trim() === '') {
+    //$('#nome').closest('.form-group').removeClass('has-error has-success');
+    if(nome.val().trim() === '') {
         invalidos.push('Nome');
-        nome.style.backgroundColor = 'red';
+        //nome.style.backgroundColor = 'red';
+        //$('#nome').closest('.form-group').addClass('has-error');
+        addErrorClass('#nome');
     } else {
-        nome.style.backgroundColor = 'white';
+        //$('#nome').closest('.form-group').addClass('has-success');
+        addSuccessClass('#nome');
     }
-    if(!/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/.test(cpf.value.trim())) {
+    if(!/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/.test(cpf.val().trim())) {
         invalidos.push('CPF');
-        cpf.style.backgroundColor = 'red';
+        addErrorClass('#cpf');
     } else {
-        cpf.style.backgroundColor = 'white';
+        addSuccessClass('#cpf');
     }
-    if(dataNascimento.value.trim() === '') {
+    if(dataNascimento.val().trim() === '') {
         invalidos.push('Data Nascimento');
-        dataNascimento.style.backgroundColor = 'red';
+        addErrorClass('#data_nascimento');
     } else {
-        dataNascimento.style.backgroundColor = 'white';
+        addSuccessClass('#data_nascimento');
     }
     if(!sexoM && !sexoF) {
         invalidos.push('Sexo');
-    }
-    if(profissao.value === '') {
-        invalidos.push('Profissão');
-        profissao.style.backgroundColor = 'red';
+        addErrorClass('#sexo_m');
     } else {
-        profissao.style.backgroundColor = 'white';
+        addSuccessClass('#sexo_m');
+    }
+    if(profissao.val() === '') {
+        invalidos.push('Profissão');
+        addErrorClass('#profissao');
+    } else {
+        addSuccessClass('#profissao');
     }
     if(!musicaPagode && !musicaRock && !musicaForro) {
         invalidos.push('Gosto musical');
+        addErrorClass('#musica_pagode');
+    } else {
+        addSuccessClass('#musica_pagode');
     }
 
     if(invalidos.length > 0) {
-        alert('Favor informar os campos: ' + invalidos.join(', '));
+        //alert('Favor informar os campos: ' + invalidos.join(', '));
+        $('#message').text(
+            'Favor informar os campos: ' + invalidos.join(', ')
+        );
+        $('#validationModal').modal();
         return false;
     }
 
@@ -76,4 +90,18 @@ function maskCpf(event) {
     } else {
         event.target.value = value;
     }
+}
+
+function removeValidationClass(selector) {
+    $(selector).closest('.form-group').removeClass('has-error has-success');
+}
+
+function addErrorClass(selector) {
+    removeValidationClass(selector);
+    $(selector).closest('.form-group').addClass('has-error');
+}
+
+function addSuccessClass(selector) {
+    removeValidationClass(selector);
+    $(selector).closest('.form-group').addClass('has-success');
 }

@@ -3,109 +3,181 @@
     <head>
         <meta charset="utf8">
         <title>Cadastro de Pessoa Física</title>
+
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     </head>
     <body>
         <form method="POST" onsubmit="return validarFormulario()">
-            <fieldset>
-                <legend>Dados pessoais</legend>
-                <div>
-                    <label for="nome">Nome</label>
-                    <input
-                        type="text"
-                        id="nome"
-                        name="nome"
-                        placeholder="Nome">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group col-lg-3 col-md-4 col-sm-5 col-xs-12">
+                        <label for="nome" class="control-label">Nome</label>
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            class="form-control"
+                            placeholder="Nome">
+                    </div>
                 </div>
-                 
-                <div>
-                    <label for="cpf">CPF</label>
+            </div>
+                
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group col-lg-3 col-md-4 col-sm-5 col-xs-12">
+                    <label for="cpf" class="control-label">CPF</label>
                     <input
                         type="text"
                         id="cpf"
                         name="cpf"
+                        class="form-control"
                         placeholder="000.000.000-00"
                         onkeyup="maskCpf(event)">
+                    </div>
                 </div>
-            </fieldset>
-
-            <div>
-                <label for="data_nascimento">Data Nascimento</label>
-                <input
-                    type="date"
-                    id="data_nascimento"
-                    name="data_nascimento">
             </div>
 
-            <div>
-                <label>Sexo</label>
-                <label>
-                    <input
-                        type="radio"
-                        id="sexo_m"
-                        name="sexo"
-                        value="masc"> Masculino
-                </label>
-                <label>
-                    <input
-                        type="radio"
-                        id="sexo_f"
-                        name="sexo"
-                        value="fem"> Feminino
-                </label>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group col-lg-3 col-md-4 col-sm-5 col-xs-12">
+                        <label for="data_nascimento" class="control-label">Data Nascimento</label>
+                        <input
+                            type="date"
+                            id="data_nascimento"
+                            name="data_nascimento"
+                            class="form-control">
+                    </div>
+                </div>
             </div>
 
-            <div>
-                <label for="profissao">Profissão</label>
-                <select
-                    id="profissao"
-                    name="profissao">
-                    <option value="">Selecioine</option>
-                    <option value="1">Analista de sistemas</option>
-                    <option value="2">Eletricista</option>
-                    <option value="3">Jornalista</option>
-                    <option value="4">Mecânico</option>
-                </select>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group col-lg-3 col-md-4 col-sm-5 col-xs-12">
+                        <label class="control-label">Sexo</label>
+                        <label class="radio-inline">
+                            <input
+                                type="radio"
+                                id="sexo_m"
+                                name="sexo"
+                                value="masc"> Masculino
+                        </label>
+                        <label class="radio-inline">
+                            <input
+                                type="radio"
+                                id="sexo_f"
+                                name="sexo"
+                                value="fem"> Feminino
+                        </label>
+                    </div>
+                </div>
             </div>
 
-            <div>
-                <label>Gosto Musical</label>
-                <label>
-                    <input
-                        type="checkbox"
-                        id="musica_pagode"
-                        name="musicas"
-                        value="pagode"> Pagode
-                </label>
-                <label>
-                    <input
-                        type="checkbox"
-                        id="musica_rock"
-                        name="musicas"
-                        value="rock"> Rock
-                </label>
-                <label>
-                <input
-                    type="checkbox"
-                    id="musica_forro"
-                    name="musicas"
-                    value="forro"> Forró
-            </label>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group col-lg-3 col-md-4 col-sm-5 col-xs-12">
+                        <label for="profissao" class="control-label">Profissão</label>
+                        <select
+                            id="profissao"
+                            name="profissao"
+                            class="form-control">
+                            <option value="">Selecioine</option>
+                            <option value="1">Analista de sistemas</option>
+                            <option value="2">Eletricista</option>
+                            <option value="3">Jornalista</option>
+                            <option value="4">Mecânico</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
-            <div>
-                <label for="sobre">Sobre</label>
-                <textarea
-                    id="sobre"
-                    name="sobre"
-                    cols="50"
-                    rows="6"
-                    title="Escreva sobre você"></textarea>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group col-lg-3 col-md-4 col-sm-5 col-xs-12">
+                        <label class="control-label">Gosto Musical</label>
+                        <div class="checkbox">
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    id="musica_pagode"
+                                    name="musicas"
+                                    value="pagode"> Pagode
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    id="musica_rock"
+                                    name="musicas"
+                                    value="rock"> Rock
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    id="musica_forro"
+                                    name="musicas"
+                                    value="forro"> Forró
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group col-lg-3 col-md-4 col-sm-5 col-xs-12">
+                        <label for="sobre" class="control-label">Sobre</label>
+                        <textarea
+                            id="sobre"
+                            name="sobre"
+                            class="form-control"
+                            rows="6"
+                            title="Escreva sobre você"></textarea>
+                    </div>
+                </div>
             </div>
             
-            <button type="reset">Limpar</button>
-            <button type="submit">Salvar</button>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
+                    <div class="pull-right">
+                        <button type="reset" class="btn btn-default">
+                            <span class="glyphicon glyphicon-erase"></span> Limpar
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-ok"></span> Salvar
+                        </button>
+                    </div>
+                </div>
+            </div>
         </form>
 
+        <div id="validationModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal">X</button>
+                        <h4 class="modal-title">Aviso</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="message"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            data-dismiss="modal">ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="node_modules/jquery/jquery.min.js"></script>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="js/formulario.js"></script>
     </body>
 </html>
