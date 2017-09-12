@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf8">
+</head>
+<body>
+    <form onsubmit="salvar(event)">
+        <div>
+            <label for="descricao">Descrição</label>
+            <input type="text" name="descricao" id="descricao">
+        </div>
+
+        <div>
+            <label for="prazo">Prazo</label>
+            <input type="date" name="prazo" id="prazo">
+        </div>
+
+        <div>
+            <label for="local">Local</label>
+            <input type="text" name="local" id="local">
+        </div>
+
+        <button type="button" onclick="voltar()">Cancelar</button>
+        <button type="submit">Salvar</button>
+    </form>
+
+    <script src="js/formulario.js"></script>
+</body>
+</html>
