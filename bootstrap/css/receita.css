@@ -1,0 +1,36 @@
+body {
+    background-color: rgb(255, 214, 221);
+}
+
+#titulo {
+    text-align: center;
+}
+
+.img-receita {
+    max-width: 150px;
+    max-height: 150px;
+    opacity: .6;
+}
+
+.img-receita:hover {
+    opacity: 1;
+}
+
+p {
+    font-style: italic;
+}
+
+h3 {
+    background-color: rgba(45, 45, 45, 0.63);
+    padding: 10px;
+    color: #FFFFFF;
+    border-radius: 10px;
+}
+
+ol>li {
+    font-size: 34px;
+}
+
+ol>li>span {
+    font-size: 14px;
+}
