@@ -1,10 +1,12 @@
-<div *ngIf="modo === 'listagem'">
+<ng-content></ng-content>
+
+<div *ngIf="!ingressoSelecionado; else ingressoForm">
     <button
         type="button"
         (click)="onNew()"
         class="btn btn-primary">Novo</button>
 
-    <table class="table">
+    <table class="table" *ngIf="ingressos.length > 0; else semIngresso">
         <thead>
             <tr>
                 <th>Filme</th>
@@ -12,25 +14,44 @@
                 <th>Sala</th>
                 <th>Data</th>
                 <th>Horário</th>
+                <th>Opções</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let ingresso of ingressos">
+            <tr *ngFor="let ingresso of ingressos; let i = index">
                 <td>{{ ingresso.titulo | uppercase }}</td>
                 <td>{{ ingresso.preco | currency : 'BRL': true }}</td>
                 <td>{{ ingresso.sala }}</td>
                 <td>{{ ingresso.data | date : 'dd/MM/yyyy' }}</td>
                 <td>{{ ingresso.horario }}</td>
+                <td>
+                    <button 
+                        type="button"
+                        class="btn btn-info"
+                        (click)="onSelect(i)">Editar</button>
+                        
+                    <button 
+                        type="button"
+                        class="btn btn-danger"
+                        (click)="onDelete(i)">Remover</button>
+                </td>
             </tr>
         </tbody>
     </table>
+    <ng-template #semIngresso>
+        <p>Nenhum ingresso disponível</p>
+    </ng-template>
 </div>
 
-<div class="row">
-    <div class="col-sm-offset-4 col-sm-4">
-        <app-ingresso-form
-            (onSave)="onSave($event)"
-            (onCancel)="onCancel()"
-            *ngIf="modo === 'cadastro'"></app-ingresso-form>
+<ng-template #ingressoForm>
+    <div class="row">
+        <div class="col-sm-offset-4 col-sm-4">
+            <app-ingresso-form
+                [ingresso]="ingressoSelecionado"
+                [index]="indexSelecionado"
+                (onSave)="onSave($event)"
+                (onUpdate)="onUpdate($event)"
+                (onCancel)="onCancel()"></app-ingresso-form>
+        </div>
     </div>
-</div>
+</ng-template>
