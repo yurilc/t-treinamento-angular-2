@@ -11,30 +11,21 @@ export class IngressoListComponent {
     modo = 'listagem';
 
     ingressos: Ingresso[] = [
-        {
-            titulo: 'It',
-            preco: 23,
-            sala: 3,
-            data: new Date(2017, 8, 15),
-            horario: '21:00'
-        },
-        {
-            titulo: 'Bingo',
-            preco: 19.75,
-            sala: 2,
-            data: new Date(2017, 8, 15),
-            horario: '19:55'
-        },
-        {
-            titulo: 'Transformers',
-            preco: 1.99,
-            sala: 1,
-            data: new Date(2017, 8, 14),
-            horario: '18:35'
-        }
+        new Ingresso('It', 23, 3, new Date(2017, 8, 15), '21:00'),
+        new Ingresso('Bingo', 19.75, 2, new Date(2017, 8, 15)),
+        new Ingresso('Transformers', 1.99, 1, new Date(2017, 8, 14), '18:35')
     ];
 
     onNew() {
         this.modo = 'cadastro';
+    }
+
+    onSave(ingresso: Ingresso) {
+        this.ingressos.push(ingresso);
+        this.modo = 'listagem';
+    }
+
+    onCancel() {
+        this.modo = 'listagem';
     }
 }

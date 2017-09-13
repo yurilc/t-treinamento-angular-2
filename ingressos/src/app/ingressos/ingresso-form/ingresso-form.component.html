@@ -1,29 +1,40 @@
-<form>
+<p>Titulo: {{ ingresso.titulo }}</p>
+<p>Preço: {{ ingresso.preco }}</p>
+<p>Sala: {{ ingresso.sala }}</p>
+<p>Data: {{ ingresso.data }}</p>
+<p>Horário: {{ ingresso.horario }}</p>
+
+<form (ngSubmit)="onSave()">
   <div class="form-group">
     <label class="control-label" for="titulo">Titulo</label>
-    <input class="form-control" type="text" id="titulo">
+    <input class="form-control" type="text" id="titulo"
+      name="titulo" [(ngModel)]="ingresso.titulo">
   </div>
 
   <div class="form-group">
     <label class="control-label" for="preco">Preço</label>
-    <input class="form-control" type="number" id="preco">
+    <input class="form-control" type="number" id="preco"
+      name="preco" [(ngModel)]="ingresso.preco">
   </div>
 
   <div class="form-group">
     <label class="control-label" for="sala">Sala</label>
-    <input class="form-control" type="text" id="sala">
+    <input class="form-control" type="text" id="sala"
+      name="sala" [(ngModel)]="ingresso.sala">
   </div>
 
   <div class="form-group">
     <label class="control-label" for="data">Data</label>
-    <input class="form-control" type="date" id="data">
+    <input class="form-control" type="date" id="data"
+      name="data" [(ngModel)]="ingresso.data">
   </div>
 
   <div class="form-group">
     <label class="control-label" for="horario">Horário</label>
-    <input class="form-control" type="text" id="horario">
+    <input class="form-control" type="text" id="horario"
+      name="horario" [(ngModel)]="ingresso.horario">
   </div>
 
-  <button class="btn btn-default" type="button">Cancelar</button>
-  <button class="btn btn-primary" type="button">Salvar</button>
+  <button class="btn btn-default" type="button" (click)="onCancel()">Cancelar</button>
+  <button class="btn btn-primary" type="submit">Salvar</button>
 </form>
