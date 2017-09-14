@@ -1,7 +1,11 @@
-<app-header></app-header>
+<app-header
+    (onPageChange)="changePage($event)"></app-header>
 
 <h3>App Component</h3>
 
-<app-ingresso-list>
+<app-ingresso-list *ngIf="pagina === 'ingresso-list'">
     <h2 [appHighlight]="{ background: 'blue' }">Ingressos</h2>
 </app-ingresso-list>
+
+<app-venda-ingresso-list
+*ngIf="pagina === 'venda-ingresso-list'"></app-venda-ingresso-list>

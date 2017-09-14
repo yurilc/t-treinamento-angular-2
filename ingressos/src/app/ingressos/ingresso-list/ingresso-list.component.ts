@@ -2,11 +2,15 @@ import { Component, OnChanges, OnInit, DoCheck, AfterContentInit,
          AfterContentChecked, OnDestroy } from '@angular/core';
 
 import { Ingresso } from '../ingresso.model';
+import { IngressoService } from "../ingresso.service";
 
 @Component({
     selector: 'app-ingresso-list',
     templateUrl: './ingresso-list.component.html',
-    styleUrls: [ './ingresso-list.component.css' ]
+    styleUrls: [ './ingresso-list.component.css' ],
+    providers: [
+        IngressoService
+    ]
 })
 export class IngressoListComponent implements OnChanges, OnInit,
     DoCheck, AfterContentInit, AfterContentChecked, OnDestroy {
@@ -14,18 +18,16 @@ export class IngressoListComponent implements OnChanges, OnInit,
     ingressoSelecionado: Ingresso;
     indexSelecionado = -1;
 
-    ingressos: Ingresso[] = [
-        new Ingresso('It', 23, 3, new Date(2017, 8, 15), '21:00'),
-        new Ingresso('Bingo', 19.75, 2, new Date(2017, 8, 15)),
-        new Ingresso('Transformers', 1.99, 1, new Date(2017, 8, 14), '18:35')
-    ];
+    ingressos: Ingresso[];
+
+    constructor(private ingressoService: IngressoService) {}
 
     ngOnChanges() {
         console.log('OnChanges');
     }
 
     ngOnInit() {
-        console.log('OnInit');
+        this.ingressos = this.ingressoService.getIngressos();
     }
 
     ngDoCheck() {

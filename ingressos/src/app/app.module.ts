@@ -8,6 +8,7 @@ import { IngressoFormComponent } from './ingressos/ingresso-form/ingresso-form.c
 import { HeaderComponent } from './header/header.component';
 import { DropdownDirective } from './dropdown.directive';
 import { HighlightDirective } from './highlight.directive';
+import { VendaIngressoListComponent } from './venda/venda-ingresso-list/venda-ingresso-list.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HighlightDirective } from './highlight.directive';
     IngressoFormComponent,
     HeaderComponent,
     DropdownDirective,
-    HighlightDirective
+    HighlightDirective,
+    VendaIngressoListComponent
   ],
   imports: [
     BrowserModule,
