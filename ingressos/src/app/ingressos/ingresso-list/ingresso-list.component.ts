@@ -52,12 +52,14 @@ export class IngressoListComponent implements OnChanges, OnInit,
     }
 
     onSave(ingresso: Ingresso) {
-        this.ingressos.push(ingresso);
+        this.ingressoService.adicionar(ingresso);
+        this.ingressos = this.ingressoService.getIngressos();
         this.ingressoSelecionado = undefined;
     }
 
     onUpdate(ingresso: Ingresso) {
-        this.ingressos.splice(this.indexSelecionado, 1, ingresso);
+        this.ingressoService.atualizar(this.indexSelecionado, ingresso);
+        this.ingressos = this.ingressoService.getIngressos();
         this.ingressoSelecionado = undefined;
     }
 
@@ -71,6 +73,7 @@ export class IngressoListComponent implements OnChanges, OnInit,
     }
 
     onDelete(index: number) {
-        this.ingressos.splice(index, 1);
+        this.ingressoService.remover(index);
+        this.ingressos = this.ingressoService.getIngressos();
     }
 }

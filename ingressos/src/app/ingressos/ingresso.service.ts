@@ -10,4 +10,16 @@ export class IngressoService {
     getIngressos() {
         return [ ...this.ingressos ];
     }
+
+    adicionar(ingresso: Ingresso) {
+        this.ingressos.push(ingresso);
+    }
+
+    atualizar(index: number, ingresso: Ingresso) {
+        this.ingressos.splice(index, 1, ingresso);
+    }
+
+    remover(index: number) {
+        this.ingressos.splice(index, 1);
+    }
 }
