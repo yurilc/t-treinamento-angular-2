@@ -1,6 +1,7 @@
 import { Component, OnChanges, OnInit, Output, Input, EventEmitter } from '@angular/core';
 
 import { Ingresso } from '../ingresso.model';
+import { IngressoService } from "../ingresso.service";
 
 @Component({
   selector: 'app-ingresso-form',
@@ -9,19 +10,24 @@ import { Ingresso } from '../ingresso.model';
 })
 export class IngressoFormComponent implements OnChanges, OnInit {
 
-  @Output('onSave') ingressoSalvo = new EventEmitter<Ingresso>();
-  @Output('onUpdate') ingressoAtualizado = new EventEmitter<Ingresso>();
+  // @Output('onSave') ingressoSalvo = new EventEmitter<Ingresso>();
+  // @Output('onSave') ingressoSalvo = new EventEmitter();
+  // @Output('onUpdate') ingressoAtualizado = new EventEmitter<Ingresso>();
+  // @Output('onUpdate') ingressoAtualizado = new EventEmitter();
   @Output('onCancel') cancelar = new EventEmitter();
 
-  @Input()
+  //@Input()
   ingresso: Ingresso = new Ingresso();
 
   @Input() index: number;
 
-  constructor() { }
+  constructor(private ingressoService: IngressoService) { }
 
   ngOnChanges() {
     console.log('OnChanges');
+    if(this.index > -1) {
+      this.ingresso = this.ingressoService.getIngresso(this.index);
+    }
   }
 
   ngOnInit() {
@@ -30,9 +36,13 @@ export class IngressoFormComponent implements OnChanges, OnInit {
   onSave() {
     console.log('IngressoFormComponent.onSave()', this.ingresso);
     if(this.index > -1) {
-      this.ingressoAtualizado.emit(this.ingresso);
+      this.ingressoService.atualizar(this.index, this.ingresso);
+      // this.ingressoAtualizado.emit();
+      // this.ingressoAtualizado.emit(this.ingresso);
     } else {
-      this.ingressoSalvo.emit(this.ingresso);
+      this.ingressoService.adicionar(this.ingresso);
+      // this.ingressoSalvo.emit();
+      // this.ingressoSalvo.emit(this.ingresso);
     }
   }
 

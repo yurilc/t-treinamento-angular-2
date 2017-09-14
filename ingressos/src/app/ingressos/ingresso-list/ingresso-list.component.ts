@@ -7,15 +7,12 @@ import { IngressoService } from "../ingresso.service";
 @Component({
     selector: 'app-ingresso-list',
     templateUrl: './ingresso-list.component.html',
-    styleUrls: [ './ingresso-list.component.css' ],
-    providers: [
-        IngressoService
-    ]
+    styleUrls: [ './ingresso-list.component.css' ]
 })
 export class IngressoListComponent implements OnChanges, OnInit,
     DoCheck, AfterContentInit, AfterContentChecked, OnDestroy {
 
-    ingressoSelecionado: Ingresso;
+    //ingressoSelecionado: Ingresso;
     indexSelecionado = -1;
 
     ingressos: Ingresso[];
@@ -28,6 +25,12 @@ export class IngressoListComponent implements OnChanges, OnInit,
 
     ngOnInit() {
         this.ingressos = this.ingressoService.getIngressos();
+        this.ingressoService.ingressosSubject.subscribe(
+            (ingressos: Ingresso[]) => {
+                this.ingressos = ingressos;
+                this.indexSelecionado = -1;
+            }
+        );
     }
 
     ngDoCheck() {
@@ -47,33 +50,34 @@ export class IngressoListComponent implements OnChanges, OnInit,
     }
 
     onNew() {
-        this.ingressoSelecionado = new Ingresso();
+        //this.ingressoSelecionado = new Ingresso();
+        this.indexSelecionado = undefined;
+    }
+
+    //onSave(/*ingresso: Ingresso*/) {
+        //this.ingressoService.adicionar(ingresso);
+        //this.ingressos = this.ingressoService.getIngressos();
+        //this.ingressoSelecionado = undefined;
+    //}
+
+    //onUpdate(/*ingresso: Ingresso*/) {
+        // this.ingressoService.atualizar(this.indexSelecionado, ingresso);
+        //this.ingressos = this.ingressoService.getIngressos();
+        //this.ingressoSelecionado = undefined;
+    //}
+
+    onCancel() {
+        // this.ingressoSelecionado = undefined;
         this.indexSelecionado = -1;
     }
 
-    onSave(ingresso: Ingresso) {
-        this.ingressoService.adicionar(ingresso);
-        this.ingressos = this.ingressoService.getIngressos();
-        this.ingressoSelecionado = undefined;
-    }
-
-    onUpdate(ingresso: Ingresso) {
-        this.ingressoService.atualizar(this.indexSelecionado, ingresso);
-        this.ingressos = this.ingressoService.getIngressos();
-        this.ingressoSelecionado = undefined;
-    }
-
-    onCancel() {
-        this.ingressoSelecionado = undefined;
-    }
-
     onSelect(index: number) {
-        this.ingressoSelecionado = { ...this.ingressos[index] };
+        // this.ingressoSelecionado = { ...this.ingressos[index] };
         this.indexSelecionado = index;
     }
 
     onDelete(index: number) {
         this.ingressoService.remover(index);
-        this.ingressos = this.ingressoService.getIngressos();
+        // this.ingressos = this.ingressoService.getIngressos();
     }
 }

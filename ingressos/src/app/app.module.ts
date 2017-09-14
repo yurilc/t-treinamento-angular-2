@@ -9,6 +9,8 @@ import { HeaderComponent } from './header/header.component';
 import { DropdownDirective } from './dropdown.directive';
 import { HighlightDirective } from './highlight.directive';
 import { VendaIngressoListComponent } from './venda/venda-ingresso-list/venda-ingresso-list.component';
+import { IngressoService } from "./ingressos/ingresso.service";
+import { LoggingService } from "./logging.service";
 
 @NgModule({
   declarations: [
@@ -24,7 +26,10 @@ import { VendaIngressoListComponent } from './venda/venda-ingresso-list/venda-in
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    IngressoService,
+    LoggingService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 <ng-content></ng-content>
 
-<div *ngIf="!ingressoSelecionado; else ingressoForm">
+<div *ngIf="indexSelecionado === -1; else ingressoForm">
     <button
         type="button"
         (click)="onNew()"
@@ -47,10 +47,7 @@
     <div class="row">
         <div class="col-sm-offset-4 col-sm-4">
             <app-ingresso-form
-                [ingresso]="ingressoSelecionado"
                 [index]="indexSelecionado"
-                (onSave)="onSave($event)"
-                (onUpdate)="onUpdate($event)"
                 (onCancel)="onCancel()"></app-ingresso-form>
         </div>
     </div>
