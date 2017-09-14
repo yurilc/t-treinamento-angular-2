@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 import { IngressoService } from "../../ingressos/ingresso.service";
 import { Ingresso } from "../../ingressos/ingresso.model";
@@ -8,21 +9,26 @@ import { Ingresso } from "../../ingressos/ingresso.model";
   templateUrl: './venda-ingresso-list.component.html',
   styleUrls: ['./venda-ingresso-list.component.css']
 })
-export class VendaIngressoListComponent implements OnInit {
+export class VendaIngressoListComponent implements OnInit, OnDestroy {
 
   ingressos: Ingresso[];
   selectedIndex = -1;
+  ingressoSubscription: Subscription;
 
   constructor(private ingressoService: IngressoService) { }
 
   ngOnInit() {
     this.ingressos = this.ingressoService.getIngressos();
-    this.ingressoService.ingressosSubject.subscribe(
+    this.ingressoSubscription = this.ingressoService.ingressosSubject.subscribe(
       (ingressos: Ingresso[]) => {
         this.ingressos = ingressos;
         this.selectedIndex = -1;
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.ingressoSubscription.unsubscribe();
   }
 
   onSelect(index: number) {

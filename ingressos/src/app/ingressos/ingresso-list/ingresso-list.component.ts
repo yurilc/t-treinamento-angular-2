@@ -1,5 +1,6 @@
 import { Component, OnChanges, OnInit, DoCheck, AfterContentInit,
          AfterContentChecked, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 import { Ingresso } from '../ingresso.model';
 import { IngressoService } from "../ingresso.service";
@@ -17,6 +18,8 @@ export class IngressoListComponent implements OnChanges, OnInit,
 
     ingressos: Ingresso[];
 
+    ingressoSubscription: Subscription;
+
     constructor(private ingressoService: IngressoService) {}
 
     ngOnChanges() {
@@ -25,10 +28,11 @@ export class IngressoListComponent implements OnChanges, OnInit,
 
     ngOnInit() {
         this.ingressos = this.ingressoService.getIngressos();
-        this.ingressoService.ingressosSubject.subscribe(
+        this.ingressoSubscription = this.ingressoService.ingressosSubject.subscribe(
             (ingressos: Ingresso[]) => {
                 this.ingressos = ingressos;
                 this.indexSelecionado = -1;
+                console.log("dentro do subject")
             }
         );
     }
@@ -46,7 +50,7 @@ export class IngressoListComponent implements OnChanges, OnInit,
     }
 
     ngOnDestroy() {
-        console.log('OnDestroy');
+        this.ingressoSubscription.unsubscribe();
     }
 
     onNew() {
