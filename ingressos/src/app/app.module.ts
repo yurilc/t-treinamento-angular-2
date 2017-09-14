@@ -11,6 +11,7 @@ import { HighlightDirective } from './highlight.directive';
 import { VendaIngressoListComponent } from './venda/venda-ingresso-list/venda-ingresso-list.component';
 import { IngressoService } from "./ingressos/ingresso.service";
 import { LoggingService } from "./logging.service";
+import { VendaIngressoFormComponent } from './venda/venda-ingresso-form/venda-ingresso-form.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LoggingService } from "./logging.service";
     HeaderComponent,
     DropdownDirective,
     HighlightDirective,
-    VendaIngressoListComponent
+    VendaIngressoListComponent,
+    VendaIngressoFormComponent
   ],
   imports: [
     BrowserModule,

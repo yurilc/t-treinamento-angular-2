@@ -7,9 +7,9 @@ import { LoggingService } from "../logging.service";
 @Injectable()
 export class IngressoService {
     private ingressos: Ingresso[] = [
-        new Ingresso('It', 23, 3, new Date(2017, 8, 15), '21:00'),
-        new Ingresso('Bingo', 19.75, 2, new Date(2017, 8, 15)),
-        new Ingresso('Transformers', 1.99, 1, new Date(2017, 8, 14), '18:35')
+        new Ingresso('It', 23, 3, new Date(2017, 8, 15), '21:00', 30),
+        new Ingresso('Bingo', 19.75, 2, new Date(2017, 8, 15), '19:15', 45),
+        new Ingresso('Transformers', 1.99, 1, new Date(2017, 8, 14), '18:35', 20)
     ];
 
     ingressosSubject = new Subject<Ingresso[]>();
@@ -39,5 +39,13 @@ export class IngressoService {
     remover(index: number) {
         this.ingressos.splice(index, 1);
         this.ingressosSubject.next(this.getIngressos());
+    }
+    
+    comprar(index: number, quantidade: number) {
+        let ingresso = this.ingressos[index];
+        ingresso.quantidade -= quantidade;
+        this.ingressosSubject.next(this.getIngressos());
+
+        // ingresso.quantidade = ingresso.quantidade - quantidade;
     }
 }

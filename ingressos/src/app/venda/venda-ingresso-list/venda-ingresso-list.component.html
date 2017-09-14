@@ -1,3 +1,32 @@
-<p>
-  venda-ingresso-list works!
-</p>
+<div *ngIf="selectedIndex === -1; else formCompra">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Sala</th>
+        <th>Data</th>
+        <th>Horário</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="cursor: pointer"
+        *ngFor="let ingresso of ingressos; let i = index"
+        (click)="onSelect(i)">
+        <td>{{ ingresso.titulo | uppercase }}</td>
+        <td>{{ ingresso.sala }}</td>
+        <td>{{ ingresso.data | date : 'dd/MM/yyyy' }}</td>
+        <td>{{ ingresso.horario }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #formCompra>
+  <div class="row">
+    <div class="col-sm-4">
+      <app-venda-ingresso-form
+      [index]="selectedIndex"
+      (onCancel)="onCancel()"></app-venda-ingresso-form>
+    </div>
+  </div>
+</ng-template>

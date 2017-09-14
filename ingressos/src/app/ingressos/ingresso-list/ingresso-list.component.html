@@ -14,6 +14,7 @@
                 <th>Sala</th>
                 <th>Data</th>
                 <th>Horário</th>
+                <th>Quantidade</th>
                 <th>Opções</th>
             </tr>
         </thead>
@@ -24,6 +25,7 @@
                 <td>{{ ingresso.sala }}</td>
                 <td>{{ ingresso.data | date : 'dd/MM/yyyy' }}</td>
                 <td>{{ ingresso.horario }}</td>
+                <td>{{ ingresso.quantidade }}</td>
                 <td>
                     <button 
                         type="button"
