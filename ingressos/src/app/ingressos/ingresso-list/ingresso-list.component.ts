@@ -1,11 +1,12 @@
 import { Component, OnChanges, OnInit, DoCheck, AfterContentInit,
          AfterContentChecked, OnDestroy } from '@angular/core';
 
-import { Ingresso } from './ingresso.model';
+import { Ingresso } from '../ingresso.model';
 
 @Component({
     selector: 'app-ingresso-list',
-    templateUrl: './ingresso-list.component.html'
+    templateUrl: './ingresso-list.component.html',
+    styleUrls: [ './ingresso-list.component.css' ]
 })
 export class IngressoListComponent implements OnChanges, OnInit,
     DoCheck, AfterContentInit, AfterContentChecked, OnDestroy {
