@@ -1,8 +1,10 @@
-<p>Titulo: {{ ingresso.titulo }}</p>
+<!--<p>Titulo: {{ ingresso.titulo }}</p>
 <p>Preço: {{ ingresso.preco }}</p>
 <p>Sala: {{ ingresso.sala }}</p>
 <p>Data: {{ ingresso.data }}</p>
-<p>Horário: {{ ingresso.horario }}</p>
+<p>Horário: {{ ingresso.horario }}</p>-->
+
+<p class="alert alert-danger" *ngIf="mensagem">{{ mensagem }}</p>
 
 <form (ngSubmit)="onSave()">
   <div class="form-group">

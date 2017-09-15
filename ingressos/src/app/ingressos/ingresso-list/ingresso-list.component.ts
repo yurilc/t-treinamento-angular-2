@@ -20,6 +20,8 @@ export class IngressoListComponent implements OnChanges, OnInit,
 
     ingressoSubscription: Subscription;
 
+    mensagem = 'Olá ';
+
     constructor(private ingressoService: IngressoService) {}
 
     ngOnChanges() {
@@ -33,6 +35,19 @@ export class IngressoListComponent implements OnChanges, OnInit,
                 this.ingressos = ingressos;
                 this.indexSelecionado = -1;
                 console.log("dentro do subject")
+            }
+        );
+        // Observable
+        this.ingressoService.getObservable().subscribe(
+            (mensagem: string) => {
+                console.log('MENSAGEM RECEBIDA:', mensagem);
+                this.mensagem += mensagem;
+            },
+            (erro: Error) => {
+                console.error('ERRO: ', erro);
+            },
+            () => {
+                console.log('Observable completado');
             }
         );
     }

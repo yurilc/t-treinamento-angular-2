@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
-import 'rxjs/add/observable/throw';
 
 import { Ingresso } from './ingresso.model';
 import { LoggingService } from "../logging.service";
@@ -29,18 +26,8 @@ export class IngressoService {
     }
 
     adicionar(ingresso: Ingresso) {
-        const obs = new Observable((observer: Observer<Ingresso>) => {
-            setTimeout(() => {
-                if(ingresso.preco < 0) {
-                    observer.error('Preço não pode ser menor que 0');
-                } else {
-                    this.ingressos.push(ingresso);
-                    this.ingressosSubject.next(this.getIngressos());
-                    observer.next(ingresso);
-                }
-            }, 1000);
-        });
-        return obs;
+        this.ingressos.push(ingresso);
+        this.ingressosSubject.next(this.getIngressos());
         // ingressosEventEmitter.emit(this.getIngressos());
     }
 
@@ -60,25 +47,5 @@ export class IngressoService {
         this.ingressosSubject.next(this.getIngressos());
 
         // ingresso.quantidade = ingresso.quantidade - quantidade;
-    }
-
-    getObservable() {
-        const obs = new Observable((observer: Observer<string>) => {
-            setTimeout(() => {
-                observer.next('Mundo !!');
-            }, 1000);
-            setTimeout(() => {
-                observer.next('Enviado de:');
-            }, 2000);
-            setTimeout(() => {
-                //observer.error('Volta que deu ruim');
-                //Observable.throw(new Error('Volta que deu ruim'));
-                observer.complete();
-            }, 2500);
-            setTimeout(() => {
-                observer.next('Marte');
-            }, 3000);
-        });
-        return obs;
     }
 }

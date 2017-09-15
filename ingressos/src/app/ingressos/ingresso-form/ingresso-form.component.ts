@@ -18,6 +18,7 @@ export class IngressoFormComponent implements OnChanges, OnInit {
 
   //@Input()
   ingresso: Ingresso = new Ingresso();
+  mensagem: string;
 
   @Input() index: number;
 
@@ -40,7 +41,14 @@ export class IngressoFormComponent implements OnChanges, OnInit {
       // this.ingressoAtualizado.emit();
       // this.ingressoAtualizado.emit(this.ingresso);
     } else {
-      this.ingressoService.adicionar(this.ingresso);
+      this.ingressoService.adicionar(this.ingresso).subscribe(
+        (ingresso: Ingresso) => {
+          console.log('ingresso criado: ', ingresso);
+        },
+        (erro: string) => {
+          this.mensagem = erro;
+        }
+      );
       // this.ingressoSalvo.emit();
       // this.ingressoSalvo.emit(this.ingresso);
     }
