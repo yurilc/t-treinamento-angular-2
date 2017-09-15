@@ -14,6 +14,7 @@ import { IngressoService } from "./ingressos/ingresso.service";
 import { LoggingService } from "./logging.service";
 import { VendaIngressoFormComponent } from './venda/venda-ingresso-form/venda-ingresso-form.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { IngressoDetailComponent } from './ingressos/ingresso-detail/ingresso-detail.component';
 
 
 /**
@@ -30,7 +31,8 @@ const routes: Routes = [
     component: IngressoListComponent,
     children: [
       { path: 'new', component: IngressoFormComponent },
-      { path: ':id/edit', component: IngressoFormComponent }
+      { path: ':id/edit', component: IngressoFormComponent },
+      { path: ':id', component: IngressoDetailComponent }
     ]
   },
   { path: 'not-found', component: PageNotFoundComponent },
@@ -47,7 +49,8 @@ const routes: Routes = [
     HighlightDirective,
     VendaIngressoListComponent,
     VendaIngressoFormComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    IngressoDetailComponent
   ],
   imports: [
     BrowserModule,

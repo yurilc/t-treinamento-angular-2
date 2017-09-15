@@ -1,0 +1,10 @@
+<p>Titulo: {{ ingresso.titulo | uppercase }}</p>
+<p>Preço: {{ ingresso.preco | currency : 'BRL' : true }}</p>
+<p>Sala: {{ ingresso.sala }}</p>
+<p>Data: {{ ingresso.data | date: 'dd/MM/yyyy' }}</p>
+<p>Horário: {{ ingresso.horario }}</p>
+<p>Quantidade: {{ ingresso.quantidade }}</p>
+
+<button type="button" class="btn btn-default" [routerLink]="['/admin', 'ingressos']">Voltar</button>
+<button type="button" class="btn btn-primary" routerLink="edit">Editar</button>
+<button type="button" class="btn btn-danger" (click)="onRemove()">Remover</button>
