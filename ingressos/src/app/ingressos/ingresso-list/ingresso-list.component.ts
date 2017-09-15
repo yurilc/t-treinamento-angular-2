@@ -14,7 +14,7 @@ export class IngressoListComponent implements OnChanges, OnInit,
     DoCheck, AfterContentInit, AfterContentChecked, OnDestroy {
 
     //ingressoSelecionado: Ingresso;
-    indexSelecionado = -1;
+    // indexSelecionado = -1;
 
     ingressos: Ingresso[];
 
@@ -33,7 +33,7 @@ export class IngressoListComponent implements OnChanges, OnInit,
         this.ingressoSubscription = this.ingressoService.ingressosSubject.subscribe(
             (ingressos: Ingresso[]) => {
                 this.ingressos = ingressos;
-                this.indexSelecionado = -1;
+                // this.indexSelecionado = -1;
                 console.log("dentro do subject")
             }
         );
@@ -68,10 +68,10 @@ export class IngressoListComponent implements OnChanges, OnInit,
         this.ingressoSubscription.unsubscribe();
     }
 
-    onNew() {
-        //this.ingressoSelecionado = new Ingresso();
-        this.indexSelecionado = undefined;
-    }
+    // onNew() {
+    //     //this.ingressoSelecionado = new Ingresso();
+    //     this.indexSelecionado = undefined;
+    // }
 
     //onSave(/*ingresso: Ingresso*/) {
         //this.ingressoService.adicionar(ingresso);
@@ -85,15 +85,15 @@ export class IngressoListComponent implements OnChanges, OnInit,
         //this.ingressoSelecionado = undefined;
     //}
 
-    onCancel() {
-        // this.ingressoSelecionado = undefined;
-        this.indexSelecionado = -1;
-    }
+    // onCancel() {
+    //     // this.ingressoSelecionado = undefined;
+    //     this.indexSelecionado = -1;
+    // }
 
-    onSelect(index: number) {
-        // this.ingressoSelecionado = { ...this.ingressos[index] };
-        this.indexSelecionado = index;
-    }
+    // onSelect(index: number) {
+    //     // this.ingressoSelecionado = { ...this.ingressos[index] };
+    //     this.indexSelecionado = index;
+    // }
 
     onDelete(index: number) {
         this.ingressoService.remover(index);

@@ -4,7 +4,9 @@
       <a class="navbar-brand">Ingressos</a>
     </div>
     <ul class="nav navbar-nav navbar-left">
-        <li><a (click)="changePage('venda-ingresso-list')">Comprar</a></li>
+        <li
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/">Comprar</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown" appDropdown>
@@ -12,7 +14,7 @@
           Admin <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a (click)="changePage('ingresso-list')">Ingressos</a></li>
+          <li routerLinkActive="active"><a [routerLink]="['admin', 'ingressos']">Ingressos</a></li>
         </ul>
       </li>
     </ul>

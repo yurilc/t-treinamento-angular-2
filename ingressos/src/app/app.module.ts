@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { IngressoListComponent } from './ingressos/ingresso-list/ingresso-list.component';
@@ -12,6 +13,29 @@ import { VendaIngressoListComponent } from './venda/venda-ingresso-list/venda-in
 import { IngressoService } from "./ingressos/ingresso.service";
 import { LoggingService } from "./logging.service";
 import { VendaIngressoFormComponent } from './venda/venda-ingresso-form/venda-ingresso-form.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+
+/**
+ * Rotas do CRUD de Ingresso
+ * listagem -> admin/ingressos        -> IngressoListComponent
+ * cadastro -> admin/ingressos/new    -> IngressoFormComponent
+ * edição -> admin/ingressos/123/edit -> IngressoFormComponent
+ * detalhe -> admin/ingressos/123     -> IngressoDetailComponent
+ */
+const routes: Routes = [
+  { path: '', component: VendaIngressoListComponent },
+  { 
+    path: 'admin/ingressos',
+    component: IngressoListComponent,
+    children: [
+      { path: 'new', component: IngressoFormComponent },
+      { path: ':id/edit', component: IngressoFormComponent }
+    ]
+  },
+  { path: 'not-found', component: PageNotFoundComponent },
+  { path: '**', redirectTo: '/not-found' }
+];
 
 @NgModule({
   declarations: [
@@ -22,11 +46,13 @@ import { VendaIngressoFormComponent } from './venda/venda-ingresso-form/venda-in
     DropdownDirective,
     HighlightDirective,
     VendaIngressoListComponent,
-    VendaIngressoFormComponent
+    VendaIngressoFormComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [
     IngressoService,

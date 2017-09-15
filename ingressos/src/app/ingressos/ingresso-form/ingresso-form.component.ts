@@ -1,4 +1,5 @@
-import { Component, OnChanges, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from "@angular/router";
 
 import { Ingresso } from '../ingresso.model';
 import { IngressoService } from "../ingresso.service";
@@ -8,30 +9,34 @@ import { IngressoService } from "../ingresso.service";
   templateUrl: './ingresso-form.component.html',
   styleUrls: ['./ingresso-form.component.css']
 })
-export class IngressoFormComponent implements OnChanges, OnInit {
+export class IngressoFormComponent implements OnInit {
 
   // @Output('onSave') ingressoSalvo = new EventEmitter<Ingresso>();
   // @Output('onSave') ingressoSalvo = new EventEmitter();
   // @Output('onUpdate') ingressoAtualizado = new EventEmitter<Ingresso>();
   // @Output('onUpdate') ingressoAtualizado = new EventEmitter();
-  @Output('onCancel') cancelar = new EventEmitter();
+  // @Output('onCancel') cancelar = new EventEmitter();
 
   //@Input()
   ingresso: Ingresso = new Ingresso();
   mensagem: string;
 
-  @Input() index: number;
+  index: number;
 
-  constructor(private ingressoService: IngressoService) { }
-
-  ngOnChanges() {
-    console.log('OnChanges');
-    if(this.index > -1) {
-      this.ingresso = this.ingressoService.getIngresso(this.index);
-    }
-  }
+  constructor(private ingressoService: IngressoService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+    //this.index = this.route.snapshot.params['id'];
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.index = params['id'];
+        if(this.index !== undefined) {
+          this.ingresso = this.ingressoService.getIngresso(this.index);
+        }
+      }
+    );
   }
 
   onSave() {
@@ -43,7 +48,7 @@ export class IngressoFormComponent implements OnChanges, OnInit {
     } else {
       this.ingressoService.adicionar(this.ingresso).subscribe(
         (ingresso: Ingresso) => {
-          console.log('ingresso criado: ', ingresso);
+          this.router.navigate(['admin', 'ingressos']);
         },
         (erro: string) => {
           this.mensagem = erro;
@@ -54,8 +59,8 @@ export class IngressoFormComponent implements OnChanges, OnInit {
     }
   }
 
-  onCancel() {
-    this.cancelar.emit();
-  }
+  // onCancel() {
+  //   this.cancelar.emit();
+  // }
 
 }

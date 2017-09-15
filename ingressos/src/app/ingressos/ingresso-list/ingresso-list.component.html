@@ -1,58 +1,50 @@
-<ng-content></ng-content>
-
 <p>{{ mensagem }}</p>
 
-<div *ngIf="indexSelecionado === -1; else ingressoForm">
-    <button
-        type="button"
-        (click)="onNew()"
-        class="btn btn-primary">Novo</button>
+<button
+    type="button"
+    routerLink="new"
+    class="btn btn-primary">Novo</button>
 
-    <table class="table" *ngIf="ingressos.length > 0; else semIngresso">
-        <thead>
-            <tr>
-                <th>Filme</th>
-                <th>Preço</th>
-                <th>Sala</th>
-                <th>Data</th>
-                <th>Horário</th>
-                <th>Quantidade</th>
-                <th>Opções</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let ingresso of ingressos; let i = index">
-                <td>{{ ingresso.titulo | uppercase }}</td>
-                <td>{{ ingresso.preco | currency : 'BRL': true }}</td>
-                <td>{{ ingresso.sala }}</td>
-                <td>{{ ingresso.data | date : 'dd/MM/yyyy' }}</td>
-                <td>{{ ingresso.horario }}</td>
-                <td>{{ ingresso.quantidade }}</td>
-                <td>
-                    <button 
-                        type="button"
-                        class="btn btn-info"
-                        (click)="onSelect(i)">Editar</button>
-                        
-                    <button 
-                        type="button"
-                        class="btn btn-danger"
-                        (click)="onDelete(i)">Remover</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <ng-template #semIngresso>
-        <p>Nenhum ingresso disponível</p>
-    </ng-template>
-</div>
-
-<ng-template #ingressoForm>
-    <div class="row">
-        <div class="col-sm-offset-4 col-sm-4">
-            <app-ingresso-form
-                [index]="indexSelecionado"
-                (onCancel)="onCancel()"></app-ingresso-form>
-        </div>
-    </div>
+<table class="table" *ngIf="ingressos.length > 0; else semIngresso">
+    <thead>
+        <tr>
+            <th>Filme</th>
+            <th>Preço</th>
+            <th>Sala</th>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Quantidade</th>
+            <th>Opções</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let ingresso of ingressos; let i = index">
+            <td>{{ ingresso.titulo | uppercase }}</td>
+            <td>{{ ingresso.preco | currency : 'BRL': true }}</td>
+            <td>{{ ingresso.sala }}</td>
+            <td>{{ ingresso.data | date : 'dd/MM/yyyy' }}</td>
+            <td>{{ ingresso.horario }}</td>
+            <td>{{ ingresso.quantidade }}</td>
+            <td>
+                <button 
+                    type="button"
+                    class="btn btn-info"
+                    [routerLink]="[i, 'edit']">Editar</button>
+                    
+                <button 
+                    type="button"
+                    class="btn btn-danger"
+                    (click)="onDelete(i)">Remover</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<ng-template #semIngresso>
+    <p>Nenhum ingresso disponível</p>
 </ng-template>
+
+<div class="row">
+    <div class="col-sm-offset-4 col-sm-4">
+        <router-outlet></router-outlet>
+    </div>
+</div>

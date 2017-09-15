@@ -6,9 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  pagina = 'venda-ingresso-list';
-
-  changePage(pagina: string) {
-    this.pagina = pagina;
-  }
+  
 }
