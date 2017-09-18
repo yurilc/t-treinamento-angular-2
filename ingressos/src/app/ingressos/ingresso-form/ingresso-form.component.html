@@ -6,35 +6,54 @@
 
 <p class="alert alert-danger" *ngIf="mensagem">{{ mensagem }}</p>
 
-<form (ngSubmit)="onSave()">
-  <div class="form-group">
+<pre>{{ f.valid }}</pre>
+
+<form (ngSubmit)="onSave()" #f="ngForm">
+  <div class="form-group" 
+  [ngClass]="{ 'has-error': titulo.invalid && titulo.touched, 'has-success': titulo.valid && titulo.touched }">
     <label class="control-label" for="titulo">Titulo</label>
     <input class="form-control" type="text" id="titulo"
-      name="titulo" [(ngModel)]="ingresso.titulo">
+      name="titulo" [(ngModel)]="ingresso.titulo" required
+      #titulo="ngModel">
+    <p
+      *ngIf="titulo.invalid && titulo.touched"
+      class="help-block">Favor preencher o campo título</p>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" [ngClass]="{ 'has-error': preco.invalid && preco.touched, 'has-success': preco.valid && preco.touched }">
     <label class="control-label" for="preco">Preço</label>
     <input class="form-control" type="number" id="preco"
-      name="preco" [(ngModel)]="ingresso.preco">
+      name="preco" [(ngModel)]="ingresso.preco" required
+      #preco="ngModel">
+      <p
+      *ngIf="preco.invalid && preco.touched"
+      class="help-block">Favor preencher o campo preço</p>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" [ngClass]="{ 'has-error': sala.invalid && sala.touched, 'has-success': sala.valid && sala.touched }">
     <label class="control-label" for="sala">Sala</label>
     <input class="form-control" type="text" id="sala"
-      name="sala" [(ngModel)]="ingresso.sala">
+      name="sala" [(ngModel)]="ingresso.sala" required minLength="1" maxLength="1"
+      #sala="ngModel">
+    <p
+      *ngIf="sala.invalid && sala.touched"
+      class="help-block">Favor preencher o campo sala</p>
   </div>
 
   <div class="form-group">
     <label class="control-label" for="data">Data</label>
     <input class="form-control" type="date" id="data"
-      name="data" [ngModel]="ingresso.data | date: 'yyyy-MM-dd'" (ngModelChange)="ingresso.data = $event">
+      name="data" [(ngModel)]="ingresso.data">
   </div>
   
-  <div class="form-group">
+  <div class="form-group" [ngClass]="{ 'has-error': horario.invalid && horario.touched, 'has-success': horario.valid && horario.touched }">
     <label class="control-label" for="horario">Horário</label>
     <input class="form-control" type="text" id="horario"
-      name="horario" [(ngModel)]="ingresso.horario">
+      name="horario" [(ngModel)]="ingresso.horario" pattern="\d{2}:\d{2}"
+      #horario="ngModel">
+    <p
+      *ngIf="horario.invalid && horario.touched"
+      class="help-block">Favor informar um horário no formato 00:00</p>
   </div>
   
   <div class="form-group">
@@ -44,5 +63,5 @@
   </div>
 
   <button class="btn btn-default" type="button" routerLink="/admin/ingressos">Cancelar</button>
-  <button class="btn btn-primary" type="submit">Salvar</button>
+  <button class="btn btn-primary" type="submit" [disabled]="f.invalid">Salvar</button>
 </form>

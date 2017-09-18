@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from "@angular/router";
-
+import { NgForm } from '@angular/forms';
+ 
 import { Ingresso } from '../ingresso.model';
 import { IngressoService } from "../../core/ingresso.service";
 
@@ -21,6 +22,9 @@ export class IngressoFormComponent implements OnInit {
   ingresso: Ingresso = new Ingresso();
   mensagem: string;
 
+  
+  @ViewChild('f') form: NgForm;
+
   index: number;
 
   constructor(private ingressoService: IngressoService,
@@ -40,13 +44,13 @@ export class IngressoFormComponent implements OnInit {
   }
 
   onSave() {
-    console.log('IngressoFormComponent.onSave()', this.ingresso);
+    console.log('IngressoFormComponent.onSave()', this.form.value);
     if(this.index > -1) {
-      this.ingressoService.atualizar(this.index, this.ingresso);
+      this.ingressoService.atualizar(this.index, this.form.value);
       // this.ingressoAtualizado.emit();
       // this.ingressoAtualizado.emit(this.ingresso);
     } else {
-      this.ingressoService.adicionar(this.ingresso).subscribe(
+      this.ingressoService.adicionar(this.form.value).subscribe(
         (ingresso: Ingresso) => {
           this.router.navigate(['admin', 'ingressos']);
         },
