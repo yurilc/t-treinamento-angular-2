@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { FilmeListComponent } from "./filme-list/filme-list.component";
 import { FilmeFormComponent } from "./filme-form/filme-form.component";
@@ -14,6 +15,7 @@ import { SharedModule } from "../shared/shared.module";
     ],
     imports: [
         SharedModule,
+        ReactiveFormsModule,
         FilmeRoutingModule
     ]
 })

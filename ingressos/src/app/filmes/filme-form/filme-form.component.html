@@ -1,9 +1,52 @@
-<button
-  type="button"
-  class="btn btn-default"
-  [routerLink]="[ '/admin', 'filmes' ]">Cancelar</button>
+<form [formGroup]="formFilme" (ngSubmit)="onSave()">
+  <div class="form-group"
+    [ngClass]="{ 'has-error': formFilme.get('titulo').invalid }">
+    <label for="titulo" class="control-label">Título</label>
+    <input type="text" id="titulo" class="form-control" formControlName="titulo">
+    <p
+      *ngIf="formFilme.get('titulo').invalid"
+      class="help-block">
+      <span *ngIf="formFilme.get('titulo').errors['required']">Favor informar o título</span>
+      <span *ngIf="formFilme.get('titulo').errors['tituloInvalido']">
+        Título não pode conter a palavra "{{ formFilme.get('titulo').errors['tituloInvalido'] }}"
+      </span>
+    </p>
+  </div>
+
+  <div class="form-group"
+    [ngClass]="{ 'has-error': formFilme.get('cartaz').invalid }">
+    <label for="cartaz" class="control-label">Cartaz</label>
+    <input type="text" id="cartaz" class="form-control" formControlName="cartaz">
+    <p
+      *ngIf="formFilme.get('cartaz').invalid"
+      class="help-block">
+      <span *ngIf="formFilme.get('cartaz').errors['required']">Favor informar o cartaz</span>
+      <span *ngIf="formFilme.get('cartaz').errors['pattern']">Favor informar uma URL</span>
+    </p>
+  </div>
+
+  <div class="form-group"
+    [ngClass]="{ 'has-error': formFilme.get('genero').invalid }">
+    <label for="genero" class="control-label">Gênero</label>
+    <select id="genero" class="form-control" formControlName="genero">
+      <option
+        *ngFor="let genero of generos"
+        [value]="genero.value">{{ genero.label }}</option>
+    </select>
+    <p
+      *ngIf="formFilme.get('genero').invalid"
+      class="help-block">Favor informar o gênero</p>
+  </div>
 
   <button
-  type="button"
-  class="btn btn-primary"
-  [routerLink]="[ '/admin', 'filmes' ]">Salvar</button>
+    type="button"
+    class="btn btn-default"
+    [routerLink]="[ '/admin', 'filmes' ]">Cancelar</button>
+
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="formFilme.invalid">Salvar</button>
+</form>
+
+<pre>{{ formFilme.get('titulo').errors | json }}</pre>
