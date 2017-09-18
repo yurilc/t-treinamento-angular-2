@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import 'rxjs/add/observable/throw';
 
-import { Ingresso } from './ingresso.model';
-import { LoggingService } from "../logging.service";
+import { Ingresso } from '../ingressos/ingresso.model';
+import { LoggingService } from "./logging.service";
 
 @Injectable()
 export class IngressoService {

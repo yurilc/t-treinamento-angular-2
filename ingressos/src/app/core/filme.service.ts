@@ -1,6 +1,7 @@
-import { Filme } from "./filme.model";
 import {  Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
+
+import { Filme } from "../filmes/filme.model";
 
 export class FilmeService {
 

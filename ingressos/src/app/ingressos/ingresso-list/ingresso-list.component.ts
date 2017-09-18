@@ -3,7 +3,7 @@ import { Component, OnChanges, OnInit, DoCheck, AfterContentInit,
 import { Subscription } from 'rxjs/Subscription';
 
 import { Ingresso } from '../ingresso.model';
-import { IngressoService } from "../ingresso.service";
+import { IngressoService } from "../../core/ingresso.service";
 
 @Component({
     selector: 'app-ingresso-list',

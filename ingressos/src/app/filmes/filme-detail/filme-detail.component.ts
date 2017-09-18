@@ -1,7 +1,7 @@
 import { ActivatedRoute, Params } from "@angular/router";
 
 import { Component, OnInit } from '@angular/core';
-import { FilmeService } from "../filme.service";
+import { FilmeService } from "../../core/filme.service";
 import { Filme } from "../filme.model";
 
 @Component({

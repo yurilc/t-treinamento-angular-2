@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { IngressoService } from "../../ingressos/ingresso.service";
+import { IngressoService } from "../../core/ingresso.service";
 import { Ingresso } from "../../ingressos/ingresso.model";
 
 @Component({

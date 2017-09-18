@@ -1,6 +1,6 @@
 import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { Ingresso } from "../../ingressos/ingresso.model";
-import { IngressoService } from "../../ingressos/ingresso.service";
+import { IngressoService } from "../../core/ingresso.service";
 
 @Component({
   selector: 'app-venda-ingresso-form',

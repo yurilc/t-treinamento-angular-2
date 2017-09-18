@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from "@angular/router";
 
 import { Ingresso } from '../ingresso.model';
-import { IngressoService } from "../ingresso.service";
+import { IngressoService } from "../../core/ingresso.service";
 
 @Component({
   selector: 'app-ingresso-form',

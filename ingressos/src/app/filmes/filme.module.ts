@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from "@angular/common";
 
 import { FilmeListComponent } from "./filme-list/filme-list.component";
 import { FilmeFormComponent } from "./filme-form/filme-form.component";
 import { FilmeDetailComponent } from "./filme-detail/filme-detail.component";
 import { FilmeRoutingModule } from "./filme-routing.module";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
     declarations: [
@@ -13,7 +13,7 @@ import { FilmeRoutingModule } from "./filme-routing.module";
         FilmeDetailComponent
     ],
     imports: [
-        CommonModule,
+        SharedModule,
         FilmeRoutingModule
     ]
 })

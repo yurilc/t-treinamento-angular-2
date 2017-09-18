@@ -16,15 +16,7 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
  */
 const routes: Routes = [
     { path: '', component: VendaIngressoListComponent },
-    { 
-      path: 'admin/ingressos',
-      component: IngressoListComponent,
-      children: [
-        { path: 'new', component: IngressoFormComponent },
-        { path: ':id/edit', component: IngressoFormComponent },
-        { path: ':id', component: IngressoDetailComponent }
-      ]
-    },
+    { path: 'admin/ingressos', loadChildren: './ingressos/ingresso.module#IngressoModule' },
     { path: 'admin/filmes', loadChildren: './filmes/filme.module#FilmeModule' },
     { path: 'not-found', component: PageNotFoundComponent },
     { path: '**', redirectTo: '/not-found' }
