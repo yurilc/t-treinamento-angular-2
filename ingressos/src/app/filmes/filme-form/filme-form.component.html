@@ -46,7 +46,7 @@
   <button
     type="submit"
     class="btn btn-primary"
-    [disabled]="formFilme.invalid">Salvar</button>
+    [disabled]="formFilme.invalid || formFilme.pending">Salvar</button>
 </form>
 
 <pre>{{ formFilme.get('titulo').errors | json }}</pre>
