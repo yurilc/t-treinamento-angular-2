@@ -11,6 +11,8 @@ import { IngressoService } from "./ingresso.service";
 import { LoggingService } from "./logging.service";
 import { FilmeService } from "./filme.service";
 import { AppRoutingModule } from "../app-routing.module";
+import { AuthService } from "./auth.service";
+import { AuthGuard } from "./auth.guard";
 
 @NgModule({
     declarations: [
@@ -28,7 +30,9 @@ import { AppRoutingModule } from "../app-routing.module";
     providers: [
         IngressoService,
         LoggingService,
-        FilmeService
+        FilmeService,
+        AuthService,
+        AuthGuard
     ],
     exports: [
         HeaderComponent,

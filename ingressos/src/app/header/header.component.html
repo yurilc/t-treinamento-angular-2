@@ -9,6 +9,9 @@
           [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/">Comprar</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
+      <li (click)="onLogin()" *ngIf="!isLoggedIn()"><a>Login</a></li>
+      <li (click)="onLogout()" *ngIf="isLoggedIn()"><a>Logout</a></li>
+
       <li class="dropdown" appDropdown>
         <a class="dropdown-toggle">
           Admin <span class="caret"></span>

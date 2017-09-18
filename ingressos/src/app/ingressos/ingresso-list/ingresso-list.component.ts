@@ -1,5 +1,6 @@
 import { Component, OnChanges, OnInit, DoCheck, AfterContentInit,
          AfterContentChecked, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute, Params } from "@angular/router";
 import { Subscription } from 'rxjs/Subscription';
 
 import { Ingresso } from '../ingresso.model';
@@ -21,14 +22,25 @@ export class IngressoListComponent implements OnChanges, OnInit,
     ingressoSubscription: Subscription;
 
     mensagem = 'Olá ';
+    searchText = '';
 
-    constructor(private ingressoService: IngressoService) {}
+    constructor(private ingressoService: IngressoService,
+                private router: Router,
+                private route: ActivatedRoute) {}
 
     ngOnChanges() {
         console.log('OnChanges');
     }
 
     ngOnInit() {
+        this.route.queryParams.subscribe(
+            (params: Params) => {
+                console.log('search: ', params['search']);
+                console.log('limit: ', params['limit']);
+                console.log('start: ', params['start']);
+                this.searchText = params['search'];
+            }
+        );
         this.ingressos = this.ingressoService.getIngressos();
         this.ingressoSubscription = this.ingressoService.ingressosSubject.subscribe(
             (ingressos: Ingresso[]) => {
@@ -66,6 +78,17 @@ export class IngressoListComponent implements OnChanges, OnInit,
 
     ngOnDestroy() {
         this.ingressoSubscription.unsubscribe();
+    }
+
+    search() {
+        this.router.navigate([], {
+            relativeTo: this.route,
+            queryParams: {
+                search: this.searchText,
+                limit: 10,
+                start: 0
+            }
+        })
     }
 
     // onNew() {
