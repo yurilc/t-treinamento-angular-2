@@ -34,7 +34,7 @@ export class FilmeFormComponent implements OnInit {
     { value: 'acao', label: 'Ação' }
   ];
 
-  index: number;
+  key: string;
 
   constructor(private filmeService: FilmeService,
               private route: ActivatedRoute) { }
@@ -42,11 +42,14 @@ export class FilmeFormComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(
       (params: Params) => {
-        this.index = params['id'];
-        if(this.index != undefined) {
-          this.filmeService.getFilme(this.index).subscribe(
+        this.key = params['id'];
+        if(this.key != undefined) {
+          this.filmeService.getFilme(this.key).subscribe(
             (filme: Filme) => {
-              this.formFilme.setValue(filme);
+              // this.formFilme.setValue(filme);
+              this.formFilme.get('titulo').setValue(filme.titulo);
+              this.formFilme.get('cartaz').setValue(filme.cartaz);
+              this.formFilme.get('genero').setValue(filme.genero);
               // this.filme = filme;
             }
           )
@@ -57,11 +60,19 @@ export class FilmeFormComponent implements OnInit {
 
   onSave() {
     const filme = this.formFilme.value;
-    this.filmeService.cadastrar(filme).subscribe(
-      (res: Response) => {
-        console.log(res.json());
-      }
-    );
+    if(this.key != undefined) {
+      this.filmeService.atualizar(this.key, filme).subscribe(
+        (res: Response) => {
+          console.log(res.json());
+        }
+      );
+    } else {
+      this.filmeService.cadastrar(filme).subscribe(
+        (filme: Filme) => {
+          console.log(filme);
+        }
+      );
+    }
   }
 
   titulosProibidos(control: FormControl): { [key: string]: any } {

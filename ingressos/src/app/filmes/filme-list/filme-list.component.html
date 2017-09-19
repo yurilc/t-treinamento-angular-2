@@ -3,6 +3,8 @@
   class="btn btn-primary"
   routerLink="new">Novo</button>
 
+  {{ erro }}
+
 <table class="table">
   <thead>
     <tr>
@@ -14,19 +16,24 @@
   </thead>
   <tbody>
     <tr *ngFor="let filme of filmes; let i = index">
-      <td>{{ filme.titulo }}</td>
+      <td>{{ filme.titulo | resumo : 50 }}</td>
       <td>{{ filme.cartaz }}</td>
       <td>{{ filme.genero }}</td>
       <td>
         <button
           type="button"
           class="btn btn-default"
-          [routerLink]="[ i ]">Detalhar</button>
+          [routerLink]="[ filme.$key ]">Detalhar</button>
         
         <button
           type="button"
           class="btn btn-primary"
-          [routerLink]="[ i, 'edit' ]">Editar</button>
+          [routerLink]="[ filme.$key, 'edit' ]">Editar</button>
+
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="onDelete(i)">Excluir</button>
       </td>
     </tr>
   </tbody>

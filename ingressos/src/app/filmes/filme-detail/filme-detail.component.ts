@@ -11,7 +11,7 @@ import { Filme } from "../filme.model";
 })
 export class FilmeDetailComponent implements OnInit {
 
-  index: number;
+  key: string;
   filme: Filme;
 
   constructor(private filmeService: FilmeService,
@@ -20,9 +20,9 @@ export class FilmeDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(
       (params: Params) => {
-        this.index = params['id'];
-        if(this.index != undefined) {
-          this.filmeService.getFilme(this.index).subscribe(
+        this.key = params['id'];
+        if(this.key != undefined) {
+          this.filmeService.getFilme(this.key).subscribe(
             (filme: Filme) => this.filme = filme
           );
         }

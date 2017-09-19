@@ -35,22 +35,43 @@ export class FilmeService {
     );
   }
 
-  getFilme(index: number) {
-    return Observable.of({ ...this.filmes[index] });
+  getFilme(key: string) {
+    return this.http.get(environment.apiUrl + 'filmes/' + key + '.json')
+      .map(
+        (res: Response) => {
+          return {
+            ...res.json(),
+            '$key': key
+          };
+        }
+      );
   }
 
   cadastrar(filme: Filme) {
-    return this.http.post(environment.apiUrl + 'filmes.json', filme);
+    return this.http.post(environment.apiUrl + 'filmes.json', filme)
+      .map(
+        (res: Response) =>{
+          if(res.ok){
+            return res.json();
+          } else {
+            console.error('Erro ao comunicar com o servidor');
+            return null;
+          }
+        }
+      );
   }
   
-  atualizar(index: number, filme: Filme) {
-    this.filmes.splice(index, 1, filme);
-    return Observable.of({ ...filme });
+  atualizar(key: string, filme: Filme) {
+    return this.http.put(
+      environment.apiUrl + 'filmes/' + key + '.json',
+      filme
+    );
   }
 
-  deletar(index: number) {
-    const filme = this.filmes.splice(index, 1)[0];
-    return Observable.of({ ...filme });
+  deletar(key: string) {
+    return this.http.delete(
+      environment.apiUrl + 'filmes/' + key + '.json'
+    );
   }
 
   isTituloDisponivel(titulo: string) {

@@ -39,7 +39,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let ingresso of ingressos; let i = index">
-            <td>{{ ingresso.titulo | uppercase }}</td>
+            <td>{{ ingresso.titulo | uppercase | semVogais }}</td>
             <td>{{ ingresso.preco | currency : 'BRL': true }}</td>
             <td>{{ ingresso.sala }}</td>
             <td>{{ ingresso.data | date : 'dd/MM/yyyy' }}</td>
