@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { Response } from '@angular/http';
 
 import { FilmeService } from "../../core/filme.service";
 import { Filme } from "../filme.model";
@@ -56,7 +57,11 @@ export class FilmeFormComponent implements OnInit {
 
   onSave() {
     const filme = this.formFilme.value;
-    console.log(filme);
+    this.filmeService.cadastrar(filme).subscribe(
+      (res: Response) => {
+        console.log(res.json());
+      }
+    );
   }
 
   titulosProibidos(control: FormControl): { [key: string]: any } {

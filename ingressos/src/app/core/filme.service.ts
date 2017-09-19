@@ -1,9 +1,14 @@
-import {  Observable } from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
+import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 
+import { environment } from '../../environments/environment';
 import { Filme } from "../filmes/filme.model";
 
+@Injectable()
 export class FilmeService {
 
   private filmes: Filme[] = [
@@ -12,10 +17,22 @@ export class FilmeService {
     new Filme('Transformers', 'http://via.placeholder.com/100x300', 'acao')
   ];
 
-  constructor() { }
+  constructor(private http: Http) { }
 
   getFilmes() {
-    return Observable.of([ ...this.filmes ]);
+    return this.http.get(environment.apiUrl + 'filmes.json').map(
+      (res: Response) => {
+        const data = res.json();
+        const filmes: Filme[] = [];
+        for(let key in data) {
+          filmes.push({
+            ...data[key],
+            '$key': key
+          });
+        };
+        return filmes;
+      }
+    );
   }
 
   getFilme(index: number) {
@@ -23,8 +40,7 @@ export class FilmeService {
   }
 
   cadastrar(filme: Filme) {
-    this.filmes.push(filme);
-    return Observable.of({ ...filme });
+    return this.http.post(environment.apiUrl + 'filmes.json', filme);
   }
   
   atualizar(index: number, filme: Filme) {

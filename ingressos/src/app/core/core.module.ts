@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
 
 import { HeaderComponent } from "../header/header.component";
 import { VendaIngressoListComponent } from "../venda/venda-ingresso-list/venda-ingresso-list.component";
@@ -24,6 +25,7 @@ import { AuthGuard } from "./auth.guard";
     imports: [
         CommonModule,
         FormsModule,
+        HttpModule,
         DropdownModule,
         AppRoutingModule
     ],
